@@ -17,7 +17,7 @@
       <input type="password" placeholder="Mot de passe" required>
       <div class="links">
         <button class="login">Connexion</button>
-        <router-link class="connexion" to="/">Mot de passe oublié?</router-link>
+        <router-link class="connexion" to="/home">Mot de passe oublié?</router-link>
       </div>
     </form>
   </div>

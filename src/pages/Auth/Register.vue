@@ -49,17 +49,21 @@ import AlertVue from "@/components/Alerte.vue";
 
 import { reactive } from "vue";
 
+
 const registerFormdata = reactive({
   name: "",
   email: "",
-  username: "", // Champ ajouté
+  username: "", 
   password: "",
 });
+
 const alert = reactive({
   show: false,
   class: "",
   msg: "",
 });
+
+
 
 const submitForm = async () => {
   await axios
