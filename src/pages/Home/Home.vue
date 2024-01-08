@@ -4,7 +4,7 @@
 </style>
 <template>
   <nav>
-    <div class="nav-lef">
+    <div class="nav-left">
       <a href="Index.html">
         <img src="https://i.postimg.cc/Y9nZymQq/logo2.png" class="logo" />
       </a>

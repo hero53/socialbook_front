@@ -13,7 +13,7 @@
 
   <div class="form-box">
     <div v-if="alert.show">
-      <AlertVue :alert="reactiveAlert" />
+      <AlertVue :alert="alert" />
     </div>
 
     <form @submit.prevent="submitFormRegister">
@@ -62,7 +62,6 @@ const alert = reactive({
   msg: "",
 });
 
-const reactiveAlert = toRefs(alert);  // Convertir alert en refs réactifs
 
 
 const submitFormRegister = async () => {
