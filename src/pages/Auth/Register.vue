@@ -13,10 +13,10 @@
 
   <div class="form-box">
     <div v-if="alert.show">
-      <AlertVue :alert="alert" />
+      <AlertVue :alert="reactiveAlert" />
     </div>
 
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="submitFormRegister">
       <input
         type="text"
         v-model="registerFormdata.name"
@@ -49,11 +49,10 @@ import AlertVue from "@/components/Alerte.vue";
 
 import { reactive } from "vue";
 
-
 const registerFormdata = reactive({
   name: "",
   email: "",
-  username: "", 
+  username: "",
   password: "",
 });
 
@@ -63,24 +62,20 @@ const alert = reactive({
   msg: "",
 });
 
+const reactiveAlert = toRefs(alert);  // Convertir alert en refs réactifs
 
 
-const submitForm = async () => {
+const submitFormRegister = async () => {
   await axios
-    .post("http://127.0.0.1:8000/api/register", {
-      name: registerFormdata.name,
-      username: registerFormdata.username, // Champ ajouté
-      email: registerFormdata.email,
-      password: registerFormdata.password,
-    })
+    .post("http://127.0.0.1:8000/api/register", registerFormdata)
     .then((response) => {
       if (response.data.status == 201) {
         alert.class = "alert-success";
-        alert.msg =response.data.message;
+        alert.msg = response.data.message;
         alert.show = true;
         // Gérer la réponse du serveur, par exemple afficher un message de succès.
         console.log("response :", response.data);
-      }else{
+      } else {
         alert.class = "alert-primary";
         alert.msg = response.data.message;
         alert.show = true;

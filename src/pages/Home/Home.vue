@@ -1,525 +1,454 @@
 <!-- Login.vue -->
 <style scoped>
-
-
-
-
-* {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  box-sizing: border-box;
-}
-
-:root{
-  --body-color:#efefef;
-  --nav-color:#1876f2;
-  --bg-color:#fff;
-}
-.dark-theme{
-  --body-color:#0a0a0a;
-  --nav-color:#000;
-  --bg-color:#000;
-}
-
-
-
-body {
-  background:var(--body-color);
-  transition: background 0.3s;
-}
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--nav-color);
-  padding: 5px 5%;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.logo {
-  width: 160px;
-  margin-right: 45px;
-}
-.nav-left,
-.nav-right {
-  display: flex;
-  align-items: center;
-}
-.nav-left ul li {
-  list-style: none;
-  display: inline-block;
-}
-.nav-left ul li img {
-  width: 28px;
-  margin: 0 15px;
-}
-
-.nav-user-icon img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  object-fit: cover;
-}
-.nav-user-icon {
-  margin-left: 30px;
-}
-.search-box {
-  background: #efefef;
-  width: 350px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  padding: 0 15px;
-}
-.search-box img {
-  width: 18px;
-}
-.search-box input {
-  width: 100%;
-  background: transparent;
-  padding: 10px;
-  outline: none;
-  border: 0;
-}
-.online {
-  position: relative;
-}
-.online::after {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  background: #41db51;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.container {
-  display: flex;
-  justify-content: space-between;
-  padding: 13px 5%;
-}
-.left-sidebar {
-  flex-basis: 25%;
-  position: sticky;
-  top: 70px;
-  align-self: flex-start;
-}
-.right-sidebar {
-  flex-basis: 25%;
-  position: sticky;
-  top: 70px;
-  align-self: flex-start;
-  background: var(--bg-color);
-  padding: 20px;
-  border-radius: 4px;
-  color: #626262;
-}
-.main-content {
-  flex-basis: 47%;
-}
-.imp-links a,
-.shortcut-links a {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-  color: #626262;
-  width: fit-content;
-}
-.imp-links a img {
-  width: 25px;
-  margin-right: 15px;
-}
-.imp-links a:last-child {
-  color: #1876f2;
-}
-.imp-links {
-  border-bottom: 1px solid #ccc;
-}
-
-.shortcut-links a img {
-  width: 40px;
-  border-radius: 4px;
-  margin-right: 15px;
-}
-.shortcut-links p {
-  margin: 25px 0;
-  color: #626262;
-  font-weight: 500;
-}
-.sidebar-tittle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 18px;
-}
-.right-sidebar h4 {
-  font-weight: 600;
-  font-size: 16px;
-}
-.sidebar-tittle a {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-  color: #626262;
-  width: fit-content;
-}
-.event {
-  display: flex;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-.left-event {
-  border-radius: 10px;
-  height: 65px;
-  width: 65px;
-  margin-right: 15px;
-  padding-top: 10px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba (0, 0, 0, 0.1);
-}
-.event p {
-  font-size: 12px;
-  text-decoration: none;
-  color: gray;
-}
-.left-event span {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #1876f2;
-  color: #fff;
-  font-size: 10px;
-  padding: 4px 0;
-}
-
-.sidebar-ads {
-  width: 100%;
-  margin-bottom: 20px;
-  border-radius: 4px;
-}
-.online-list {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.online-list .online img {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-.online-list .online {
-  width: 40px;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-.online-list .online::after {
-  top: unset;
-  bottom: 5px;
-}
-.story-gallery {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-.story {
-  flex-basis: 18%;
-  padding-top: 32%;
-  position: relative;
-  background-position: center;
-  background-size: cover;
-  border-radius: 10px;
-}
-.story img {
-  position: absolute;
-  width: 45px !important;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-  top: 10px;
-  left: 10px;
-  border: 3px solid #1876f2;
-}
-.story p {
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  font-size: 14px;
-}
-.story1{
-  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5)),
-    url(https://cdn.shopify.com/s/files/1/0702/0511/2635/files/Omar_Parawni.jpg?v=1703156151)
-}
-.story2{
-  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5)),
-    url(https://cdn.shopify.com/s/files/1/0702/0511/2635/files/status-2.png);
-}
-.story3{
-  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5)),
-    url(https://cdn.shopify.com/s/files/1/0702/0511/2635/files/status-3.png);
-}
-.story4{
-  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5)),
-    url(https://cdn.shopify.com/s/files/1/0702/0511/2635/files/status-4.png);
-}
-.story5{
-  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5)),
-    url(https://cdn.shopify.com/s/files/1/0702/0511/2635/files/status-5.png);
-}
-
-.story.story1 img{
-
-    top: unset;
-    left: 50%;
-    bottom: 40px;
-    transform: translateX(-50%);
-    border: 0;
-    width: 35px;    
-
-}
-.right-event i{
-    margin: 3px;
-}
-.write-post-cotainer{
-  width: 100%;
-  background: var(--bg-color);
-  border-radius: 6px;
-  padding: 20px;
-  color: #626262;
-}
-.user-profile{
-  display: flex;
-  align-items: center;
-}
-.user-profile img {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  margin-right: 10px;  
-  object-fit: cover;
-}
-.user-profile p {
-  margin-bottom: -5px;
-  font-weight: 500;
-  color: #626262;
-}
-.user-profile small {
-  font-size: 12px;
-
-}
-.post-input-container{
-  padding-left: 55px;
-  padding-top: 20px;
-}
-.post-input-container textarea{
-  width: 100%;
-  border: 0;
-  outline: 0;
-  border-bottom: 1px solid #ccc;
-  background: transparent;
-  resize: none;
-}
-.add-post-links{
-  display: flex;
-  margin-top: 10px;
-}
-.add-post-links a {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  color: #626262;
-  margin-left: 30px;
-  font-size: 12px;
-}
-.add-post-links a img{
-  width: 20px;
-  margin-right: 10px;
-  
-}
-.post-container{
-  width: 100%;
-  background: var(--bg-color);
-  border-radius: 6px;
-  padding: 20px;
-  color: #626262;
-  margin: 20px 0;
-}
-.user-profile span{
-  font-size: 11px;
-  color: #626262;
-}
-.post-text{
-  color: #9a9a9a;
-  margin: 15px 0;
-  font-size: 15px;
-}
-.post-text span{
-  color: #626262;
-  font-weight: 500;
-}
-.post-text a{
-  text-decoration: none;
-  color: #1876f2;
-  font-size: 14px;
-}
-.post-img{
-  width: 100%;
-  border-radius: 5px;
-  margin-bottom: 4px;
-}
-.post-row{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.activity-icons div img{
-  width: 18px;
-  margin-right: 10px;
-}
-.activity-icons div{
-  display: inline-flex;
-  margin-right: 30px;
-  align-items: center;
-
-}
-.post-profile-icon{
-  display: flex;
-  align-items: center;
-}
-.post-profile-icon img{
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  margin-right: 5px;
-
-}
-.post-row a{
-  color: #9a9a9a;
-}
-
-.Load-More-btn{
-   
-  display: block;
-  margin: auto;
-  cursor: pointer;
-  padding: 5px 10px;
-  border: 1px solid #9a9a9a;
-  color: #626262;
-  background: transparent;
-  border-radius: 4px;
-}
-.footer{
-  text-align: center;
-  color: #626262;
-  padding: 10px 0 20px;
-  font-size: 13px;
-}
-.Load-More-btn:hover{
-  background: #1876f2;
-  color: #fff;
-}
-.settings-menu{
-  position: absolute;
-  width: 20% ;
-  max-width: 350px;
-  background: var(--bg-color);
-  box-shadow: 0 0 10px rgba(0, 0, 0,0.4);
-  border-radius: 4px;
-  overflow: hidden;
-  top: 108%;
-  right: 5%;
-  max-height: 0 ;
-  transition: max-height 0.3s ; 
-}
-
-.settings-menu-height{
-  max-height: 450px;
-}
-
-
-.user-profile a{
-  font-size: 12px;
-  color:#1876f2;
-  text-decoration: none;
-
-}
-
-.settings-menu-inner{
-  padding: 20px;
-}
-
-.settings-menu hr{
-  border: 0;
-  height: 1px;
-  background: #9a9a9a;
-  margin: 15px 0;
-}
-
-.settings-links{
-  display: flex;
-  align-items: center;
-  margin: 15px 0;
-}
-.settings-links .settings-icon{
-  width: 38px;
-  margin-right: 10px;
-  border-radius: 50%;
-
-}
-.settings-links a{
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: space-between;
-  text-decoration: none;
-  color: #626262;
-}
-
-#dark-btn{
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #ccc;
-  width: 45px;
-  border-radius: 15px;
-  padding: 2px 3px;
-  cursor: pointer;
-  display: flex;
-  transition: padding-left 0.5s, background 0.5s;
-}
-
-#dark-btn span {
-  width: 18px;
-  height: 18px;
-  background: #fff;
-  border-radius: 50%;
-  display: inline-block;
-  
-}
-
-#dark-btn.dark-btn-on{
-  padding-left: 23px;
-  background:#626262;
-}
-
-
-
-
+@import "Home.css";
 </style>
 <template>
- 
+  <nav>
+    <div class="nav-lef">
+      <a href="Index.html">
+        <img src="https://i.postimg.cc/Y9nZymQq/logo2.png" class="logo" />
+      </a>
+      <ul>
+        <li>
+          <img src="https://i.postimg.cc/Fs3m1Djy/notification.png" />
+        </li>
+        <li><img src="https://i.postimg.cc/YqGKZ8nc/inbox.png" /></li>
+        <li><img src="https://i.postimg.cc/xCzpgFjg/video.png" /></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="search-box">
+        <img src="https://i.postimg.cc/SKtHgM6Q/search.png" />
+        <input type="text" placeholder="Search" />
+      </div>
+      <div class="nav-user-icon online" onclick="settingsMenuToggle()">
+        <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" />
+      </div>
+    </div>
+    <!----------------Settings Menu"----------------------->
+    <div class="settings-menu">
+      <div id="dark-btn">
+        <span></span>
+      </div>
+      <div class="settings-menu-inner">
+        <div class="user-profile">
+          <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" />
+          <div>
+            <p>John Nicholson</p>
+            <a href="profile.html">See your profile</a>
+          </div>
+        </div>
+        <hr />
+        <div class="user-profile">
+          <img src="https://i.postimg.cc/hv3nx52s/feedback.png" />
+          <div>
+            <p>Give Feedback</p>
+            <a href="#">Help us to improve the new design</a>
+          </div>
+        </div>
+        <hr />
+        <div class="settings-links">
+          <img
+            src="https://i.postimg.cc/QCcPNYRV/setting.png"
+            class="settings-icon"
+          />
+          <a href="#"
+            >Settings & Privacy
+            <img src="https://i.postimg.cc/RF1dBMWr/arrow.png" width="10px"
+          /></a>
+        </div>
+        <div class="settings-links">
+          <img
+            src="https://i.postimg.cc/C5tydfK6/help.png"
+            class="settings-icon"
+          />
+          <a href="#"
+            >Help & Support<img
+              src="https://i.postimg.cc/RF1dBMWr/arrow.png"
+              width="10px"
+          /></a>
+        </div>
+        <div class="settings-links">
+          <img
+            src="https://i.postimg.cc/5yt1XVSj/display.png"
+            class="settings-icon"
+          />
+          <a href="#"
+            >Display & Accessibility
+            <img src="https://i.postimg.cc/RF1dBMWr/arrow.png" width="10px"
+          /></a>
+        </div>
+        <div class="settings-links">
+          <img
+            src="https://i.postimg.cc/PJC9GrMb/logout.png"
+            class="settings-icon"
+          />
+          <a href="#"
+            >Logout
+            <img src="https://i.postimg.cc/RF1dBMWr/arrow.png" width="10px"
+          /></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <!----------------Left Sidebar----------------------->
+    <div class="left-sidebar">
+      <div class="imp-links">
+        <a href="#"
+          ><img src="https://i.postimg.cc/RCj4MjnC/news.png" />Latest News</a
+        >
+        <a href="#"
+          ><img src="https://i.postimg.cc/MpBwMtV0/friends.png" />Friendss</a
+        >
+        <a href="#"
+          ><img src="https://i.postimg.cc/44FRWj1b/group.png" />Group</a
+        >
+        <a href="#"
+          ><img
+            src="https://i.postimg.cc/0jh39RtT/marketplace.png"
+          />Marketplace</a
+        >
+        <a href="#"
+          ><img src="https://i.postimg.cc/VsXHCTVk/watch.png" />Watch</a
+        >
+        <a href="#">See More</a>
+      </div>
+      <div class="shortcut-link">
+        <p>Your Shortcuts</p>
+        <a href="#"
+          ><img src="https://i.postimg.cc/3JHVf7vG/shortcut-1.png" />Web
+          Developers</a
+        >
+        <a href="#"
+          ><img src="https://i.postimg.cc/rFCbvb1P/shortcut-2.png" />Web Design
+          course</a
+        >
+        <a href="#"
+          ><img src="https://i.postimg.cc/0yk3xfZ2/shortcut-3.png" />Full Strack
+          Development</a
+        >
+        <a href="#"
+          ><img src="https://i.postimg.cc/Z5wQqdDP/shortcut-4.png" />Website
+          Experts</a
+        >
+      </div>
+    </div>
+    <!----------------Main Sidebar----------------------->
+    <div class="main-content">
+      <div class="story-gallery">
+        <div class="story story1">
+          <img src="https://i.postimg.cc/TPh453Zz/upload.png" />
+          <p>Post Story</p>
+        </div>
+        <div class="story story2">
+          <img src="https://i.postimg.cc/XNPtfdVs/member-1.png" />
+          <p>Alison</p>
+        </div>
+        <div class="story story3">
+          <img src="https://i.postimg.cc/4NhqByys/member-2.png" />
+          <p>Jackson</p>
+        </div>
+        <div class="story story4">
+          <img src="https://i.postimg.cc/FH5qqvkc/member-3.png" />
+          <p>Samona</p>
+        </div>
+        <div class="story story5">
+          <img src="https://i.postimg.cc/Sx65bPcP/member-4.png" />
+          <p>John Doe</p>
+        </div>
+      </div>
+      <div class="write-post-container">
+        <div class="user-profile">
+          <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" />
+          <div>
+            <p>John Nicholson</p>
+            <small>Public <i class="fas fa-caret-down"></i></small>
+          </div>
+        </div>
+        <div class="post-input-container">
+          <textarea
+            rows="3"
+            placeholder="What's on your mind, John?"
+          ></textarea>
+          <div class="add-post-links">
+            <a href="#"
+              ><img src="https://i.postimg.cc/QMD2BDXs/live-video.png" />Live
+              Video</a
+            >
+            <a href="#"
+              ><img
+                src="https://i.postimg.cc/6pKKZn0D/photo.png"
+              />Photo/Video</a
+            >
+            <a href="#"
+              ><img
+                src="https://i.postimg.cc/Pf6TBCdD/feeling.png"
+              />Feling/Activity</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="post-container">
+        <dic class="post-row">
+          <div class="user-profile">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" />
+            <div>
+              <p>John Nicholson</p>
+              <span>June 24 2021, 13:40 pm</span>
+            </div>
+          </div>
+          <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+        </dic>
+        <p class="post-text">
+          Subscribe <span>@Vkive Tutorials</span> Youtube Channel to watch more
+          videos on website development and UI desings.
+          <a href="#">#VkiveTutorials</a> <a href="#">#YoutubeChannel</a>
+        </p>
+        <img
+          src="https://i.postimg.cc/9fjhGTY6/feed-image-1.png"
+          class="post-img"
+        />
+        <div class="post-row">
+          <div class="activity-icons">
+            <div>
+              <img src="https://i.postimg.cc/pLKNXrMq/like-blue.png" />120
+            </div>
+            <div>
+              <img src="https://i.postimg.cc/rmjMymWv/comments.png" />45
+            </div>
+            <div><img src="https://i.postimg.cc/T2bBchpG/share.png" />20</div>
+          </div>
+          <div class="post-porfile-icon">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" /><i
+              class="fas fa-caret-down"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="post-container">
+        <dic class="post-row">
+          <div class="user-profile">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" />
+            <div>
+              <p>John Nicholson</p>
+              <span>June 24 2021, 13:40 pm</span>
+            </div>
+          </div>
+          <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+        </dic>
+        <p class="post-text">
+          Like and share this video with friends, tag<span
+            >@Vkive Tutorials</span
+          >facebook page on your post. Ask your dobuts in the comments.
+          <a href="#">#VkiveTutorials</a> <a href="#">#YoutubeChannel</a>
+        </p>
+        <img
+          src="https://i.postimg.cc/Xvc0xJ2p/feed-image-2.png"
+          class="post-img"
+        />
+        <div class="post-row">
+          <div class="activity-icons">
+            <div>
+              <img src="https://i.postimg.cc/pLKNXrMq/like-blue.png" />120
+            </div>
+            <div>
+              <img src="https://i.postimg.cc/rmjMymWv/comments.png" />45
+            </div>
+            <div><img src="https://i.postimg.cc/T2bBchpG/share.png" />20</div>
+          </div>
+          <div class="post-porfile-icon">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" /><i
+              class="fas fa-caret-down"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="post-container">
+        <dic class="post-row">
+          <div class="user-profile">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" />
+            <div>
+              <p>John Nicholson</p>
+              <span>June 24 2021, 13:40 pm</span>
+            </div>
+          </div>
+          <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+        </dic>
+        <p class="post-text">
+          Like and share this video with friends, tag<span
+            >@Vkive Tutorials</span
+          >facebook page on your post. Ask your dobuts in the comments.
+          <a href="#">#VkiveTutorials</a> <a href="#">#YoutubeChannel</a>
+        </p>
+        <img
+          src="https://i.postimg.cc/tJ7QXz9x/feed-image-3.png"
+          class="post-img"
+        />
+        <div class="post-row">
+          <div class="activity-icons">
+            <div>
+              <img src="https://i.postimg.cc/pLKNXrMq/like-blue.png" />120
+            </div>
+            <div>
+              <img src="https://i.postimg.cc/rmjMymWv/comments.png" />45
+            </div>
+            <div><img src="https://i.postimg.cc/T2bBchpG/share.png" />20</div>
+          </div>
+          <div class="post-porfile-icon">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" /><i
+              class="fas fa-caret-down"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="post-container">
+        <dic class="post-row">
+          <div class="user-profile">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" />
+            <div>
+              <p>John Nicholson</p>
+              <span>June 24 2021, 13:40 pm</span>
+            </div>
+          </div>
+          <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+        </dic>
+        <p class="post-text">
+          Like and share this video with friends, tag<span
+            >@Vkive Tutorials</span
+          >facebook page on your post. Ask your dobuts in the comments.
+          <a href="#">#VkiveTutorials</a> <a href="#">#YoutubeChannel</a>
+        </p>
+        <img
+          src="https://i.postimg.cc/hjDRYBwM/feed-image-4.png"
+          class="post-img"
+        />
+        <div class="post-row">
+          <div class="activity-icons">
+            <div>
+              <img src="https://i.postimg.cc/pLKNXrMq/like-blue.png" />120
+            </div>
+            <div>
+              <img src="https://i.postimg.cc/rmjMymWv/comments.png" />45
+            </div>
+            <div><img src="https://i.postimg.cc/T2bBchpG/share.png" />20</div>
+          </div>
+          <div class="post-porfile-icon">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" /><i
+              class="fas fa-caret-down"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="post-container">
+        <dic class="post-row">
+          <div class="user-profile">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" />
+            <div>
+              <p>John Nicholson</p>
+              <span>June 24 2021, 13:40 pm</span>
+            </div>
+          </div>
+          <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+        </dic>
+        <p class="post-text">
+          Like and share this video with friends, tag<span
+            >@Vkive Tutorials</span
+          >facebook page on your post. Ask your dobuts in the comments.
+          <a href="#">#VkiveTutorials</a> <a href="#">#YoutubeChannel</a>
+        </p>
+        <img
+          src="https://i.postimg.cc/ZRwztQzm/feed-image-5.png"
+          class="post-img"
+        />
+        <div class="post-row">
+          <div class="activity-icons">
+            <div>
+              <img src="https://i.postimg.cc/pLKNXrMq/like-blue.png" />120
+            </div>
+            <div>
+              <img src="https://i.postimg.cc/rmjMymWv/comments.png" />45
+            </div>
+            <div><img src="https://i.postimg.cc/T2bBchpG/share.png" />20</div>
+          </div>
+          <div class="post-porfile-icon">
+            <img src="https://i.postimg.cc/cHg22LhR/profile-pic.png" /><i
+              class="fas fa-caret-down"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="load-more-btn">Load More</button>
+    </div>
+    <!----------------Right Sidebar----------------------->
+    <div class="right-sidebar">
+      <div class="sidebar-title">
+        <h4>Events</h4>
+        <a href="#">See All</a>
+      </div>
+      <div class="event">
+        <div class="left-event">
+          <h3>18</h3>
+          <span>March</span>
+        </div>
+        <div class="right-event">
+          <h4>Social Media</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Willson Tech Park</p>
+          <a href="#">More Info</a>
+        </div>
+      </div>
+      <div class="event">
+        <div class="left-event">
+          <h3>22</h3>
+          <span>June</span>
+        </div>
+        <div class="right-event">
+          <h4>Mobile Marketing</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Willson Tech Park</p>
+          <a href="#">More Info</a>
+        </div>
+      </div>
+      <div class="sidebar-title">
+        <h4>Advertisement</h4>
+        <a href="#">close</a>
+      </div>
+      <img
+        src="https://i.postimg.cc/CLXYx9BL/advertisement.png"
+        class="siderbar-ads"
+      />
+      <div class="sidebar-title">
+        <h4>Conversation</h4>
+        <a href="#">Hide Chat</a>
+      </div>
+      <div class="online-list">
+        <div class="online">
+          <img src="https://i.postimg.cc/XNPtfdVs/member-1.png" />
+        </div>
+        <p>Alison Mina</p>
+      </div>
+      <div class="online-list">
+        <div class="online">
+          <img src="https://i.postimg.cc/4NhqByys/member-2.png" />
+        </div>
+        <p>Jackson Aston</p>
+      </div>
+      <div class="online-list">
+        <div class="online">
+          <img src="https://i.postimg.cc/FH5qqvkc/member-3.png" />
+        </div>
+        <p>Samona Rose</p>
+      </div>
+      <div class="online-list">
+        <div class="online">
+          <img src="https://i.postimg.cc/Sx65bPcP/member-4.png" />
+        </div>
+        <p>Mike Pérez</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p>Copyright 2022 - Vkive Tutorials</p>
+  </div>
 </template>
 
 <script setup></script>

@@ -8,6 +8,7 @@
 import { defineProps } from 'vue';
 
 const props = defineProps(['alert']);
+
 </script>
 
 <style scoped></style>
