@@ -1,6 +1,6 @@
 <!-- Login.vue -->
 <style scoped>
-@import "Home.css";
+@import "home.css";
 </style>
 <template>
   <nav>

@@ -28,11 +28,14 @@
         v-model="loginFormdata.password"
         required
       />
-      <div class="links">
-        <button class="login" type="submit">Connexion</button>
+      <div class="">
+        <button v-if="!loading" class="login" type="submit">Connexion</button>
+          <span v-else class="spinner-border"></span>  
+
         <router-link class="connexion" to="/home"
           >Mot de passe oublié?</router-link
         >
+
       </div>
     </form>
   </div>
@@ -41,7 +44,7 @@
 <script setup>
 import axios from "axios";
 import AlertVue from "@/components/Alerte.vue";
-import { reactive } from "vue";
+import { reactive, ref  } from "vue";
 
 const loginFormdata = reactive({
   email: "",
@@ -54,28 +57,39 @@ const alert = reactive({
   msg: "",
 });
 
-const submitFormLogin = async () => {
-  console.log("response :", loginFormdata);
+const loading = ref(false)
 
-  await axios
+const submitFormLogin = () => {
+  console.log("response :", loginFormdata);
+  loading.value = true
+  axios
     .post("http://127.0.0.1:8000/api/login", loginFormdata)
     .then((response) => {
       if (response.data.status == 200) {
         sessionStorage.setItem("accessToken", response.data.token);
 
-        alert.class = "alert-success";
-        alert.msg = response.data.message;
-        alert.show = true;
+        // alert.class = "alert-success";
+        // alert.msg = response.data.message;
+        // alert.show = true;
+        showAlert("alert-success", response.data.message);
+
         // Gérer la réponse du serveur, par exemple afficher un message de succès.
         // showAlert("alert-success", data.message);
         console.log("response :", response.data);
       } else {
         // showAlert("alert-danger", data.message)
-        alert.class = "alert-danger";
-        alert.msg = response.data.message;
-        alert.show = true;
+        // alert.class = "alert-danger";
+        // alert.msg = response.data.message;
+        // alert.show = true;
+        showAlert("alert-danger", response.data.message);
       }
-    });
+    })
+    .catch((e) => {
+      showAlert("alert-danger", "response.data.message");
+    })
+    .finally(() => {
+      loading.value = false 
+    })
 };
 
 const showAlert = (cssClass, message) => {
