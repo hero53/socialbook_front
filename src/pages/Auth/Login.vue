@@ -14,14 +14,14 @@
         </div>
         <div class="col-xl-4 col-lg-6 col-md-12">
           <div class="card shadow border-0 card-body">
-            <form>
+            <form @submit.prevent="submitFormLogin">
               <div v-if="alert.show">
                 <AlertVue :alert="alert" />
               </div>
               <div class="mb-3">
                 <label for="emailOrPhone">Email or phone number</label>
                 <input
-                class="form-control form-control-lg"
+                  class="form-control form-control-lg"
                   type="text"
                   placeholder="Email"
                   v-model="loginFormdata.email"
@@ -31,7 +31,7 @@
               <div class="mb-3">
                 <label for="password">Password</label>
                 <input
-                class="form-control form-control-lg"
+                  class="form-control form-control-lg"
                   type="password"
                   placeholder="Mot de passe"
                   v-model="loginFormdata.password"
@@ -40,19 +40,34 @@
               </div>
               <div class="d-grid gap-2 col-12 mx-auto">
                 <button
+                  v-if="loading == false"
                   class="btn btn-primary text-light fw-bold btn-lg border-0 btn-h-primary"
                   type="submit"
                 >
                   Connexion
                 </button>
+                <button
+                  v-else
+                  class="btn btn-primary text-light fw-bold btn-lg border-0 btn-h-primary"
+                  type="submit"
+                >
+                  <span
+                    class="spinner-grow spinner-grow-sm"
+                    aria-hidden="true"
+                  ></span>
+                  <span role="status">Chargement...</span>
+                </button>
                 <div class="text-center">
-                  <router-link class="connexion" to="/home">
+                  <router-link class="connexion" to="/">
                     Mot de passe oublié?
                   </router-link>
                 </div>
                 <hr />
                 <div class="text-center pb-2">
-                  <router-link  class="btn btn-success text-light fw-bold btn-lg border-0 btn-h-success" to="/">
+                  <router-link
+                    class="btn btn-success text-light fw-bold btn-lg border-0 btn-h-success"
+                    to="/"
+                  >
                     Créer un compte
                   </router-link>
                 </div>
